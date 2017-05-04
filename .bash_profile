@@ -2,12 +2,12 @@
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
-    . ~/.bashrc
+        . ~/.bashrc
 fi
 
 # User specific environment and startup programs
 
-PATH=$PATH:$HOME/bin
+PATH=${HOME}/bin:$PATH
 export JAVA_HOME=/opt/omega/java
 export PATH=${JAVA_HOME}/bin:$PATH
 export MVN_HOME=/opt/omega/maven
