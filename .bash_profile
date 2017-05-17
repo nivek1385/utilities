@@ -63,4 +63,4 @@ alias wcl='wc -l'        # count # of lines
 # reloads the prompt, usefull to take new modifications into account
 alias reload="source ~/.bash_profile"
 # grabs the latest .bash_profile file and reloads the prompt
-alias updatebashprofile="curl https://raw.github.com/erwanjegouzo/dotfiles/master/.bash_profile > ~/.bash_profile && reload
+alias updatebashprofile="curl https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload
