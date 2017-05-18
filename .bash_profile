@@ -13,7 +13,7 @@ export PATH=${JAVA_HOME}/bin:$PATH
 export MVN_HOME=/opt/omega/maven
 export PATH+=":${MVN_HOME}/bin"
 export PATH
-source ~/khsvn/svn-khartley.sh
+#source ~/khsvn/svn-khartley.sh
 alias shy="ssh -Y"
 alias sl="ls"
 alias gist="history | grep"
