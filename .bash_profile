@@ -49,7 +49,7 @@ extract () {
         echo "'$1' is not a valid file"
     fi
 }
-alias mnt=”mount |column -t”
+alias mnt='mount | column -t'
 # Find a file from the current directory
 alias ff='find . -name '
 
@@ -61,6 +61,6 @@ alias wcl='wc -l'        # count # of lines
 
 
 # reloads the prompt, usefull to take new modifications into account
-alias reload="source ~/.bash_profile"
+alias reload='source ~/.bash_profile'
 # grabs the latest .bash_profile file and reloads the prompt
-alias updatebashprofile="curl https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload"
+alias updatebashprofile='curl https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload'
