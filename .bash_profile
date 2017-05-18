@@ -53,7 +53,7 @@ alias mnt='mount | column -t'
 # Find a file from the current directory
 alias ff='find . -name '
 
-alias ip='whoami ; echo -e \ - Public facing IP Address: ; curl ipecho.net/plain ; echo ; echo -e \ - Internal IP Address: ;  ipconfig getifaddr en0'
+alias ip="whoami ; echo -e \ - Public facing IP Address: ; curl ipecho.net/plain ; echo ; echo -e \ - Internal IP Address: ; ifconfig wlp2s0 | grep 'inet addr:' | cut -d ' ' -f12 | cut -d: -f2"
 
 alias wcl='wc -l'        # count # of lines
 
