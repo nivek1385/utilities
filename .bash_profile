@@ -85,8 +85,8 @@ fi
 case $distro in
         "LinuxMint")
                 #Do Mint specific items
-                alias apu="apt-get update"
-                alias api="apt-get install "
+                alias apu="sudo apt-get update"
+                alias api="sudo apt-get install "
                 ;;
         "CentOS")
                 #Do CentOS specific items
