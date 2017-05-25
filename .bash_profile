@@ -93,7 +93,7 @@ case $distro in
                 alias yumu="yum update "
                 alias yumi="yum install "
                 ;;
-        "Redhat*")
+        Redhat*)
                 #Do RHEL specific items
                 alias yumu="yum update "
                 alias yumi="yum install "
