@@ -65,7 +65,7 @@ if [ $# -eq 0 ]
         int=$(route | grep '^default' | grep -o '[^ ]*$')
         echo "No interface supplied, using default route's interface: $int"
 else
-        int=$i
+        int=$1
 fi
 if [ "$(ifconfig $int | grep 'inet')" != "" ]; then
         ifconfig $int | grep 'inet ' | sed "s/   \+/:/" | sed "s/  .*//" | sed "s/[a-z: ]\+//"
