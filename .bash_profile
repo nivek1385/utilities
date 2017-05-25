@@ -89,8 +89,12 @@ case $distro in
                 alias api="apt-get install "
                 ;;
         "CentOS")
+                #Do CentOS specific items
+                alias yumu="yum update "
+                alias yumi="yum install "
+                ;;
         "Redhat*")
-                #Do RHEL & CentOS specific items
+                #Do RHEL specific items
                 alias yumu="yum update "
                 alias yumi="yum install "
                 ;;
