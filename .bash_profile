@@ -75,9 +75,29 @@ fi
 
 alias wcl='wc -l'        # count # of lines
 
-#implement later: source <(curl -sS domain.tld/scripts/.bashrc)
-
-
+#Set distro specific settings
+if [ -e /etc/redhat-release ]; then
+        distro=$(cat /etc/redhat-release | cut -d " " -f1)
+elif [ -e /etc/lsb-release ]; then
+        source /etc/lsb-release
+        distro=$DISTRIB_ID
+fi
+case $distro in
+        "LinuxMint")
+                #Do Mint specific items
+                alias apu="apt-get update"
+                alias api="apt-get install "
+                ;;
+        "CentOS")
+        "Redhat*")
+                #Do RHEL & CentOS specific items
+                alias yumu="yum update "
+                alias yumi="yum install "
+                ;;
+        *)
+                #Do non-specific items
+                ;;
+esac
 # reloads the prompt, usefull to take new modifications into account
 alias reload='source ~/.bash_profile'
 # grabs the latest .bash_profile file and reloads the prompt
