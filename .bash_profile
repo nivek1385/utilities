@@ -52,6 +52,8 @@ extract () {
 alias mnt='mount | column -t'
 # Find a file from the current directory
 alias ff='find . -name '
+# Find a file from root
+alias fr='find / -name '
 
 ip () {
 whoami
