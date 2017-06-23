@@ -26,6 +26,7 @@ alias tstamp="date +'%H%M%S'"
 cd() { builtin cd "$@"; pwd; echo; ls; } #cd changes directory, prints current (new) dir, prints newline, lists contents of (new) dir
 alias cdmnt='mount /dev/cdrom /mnt/cdrom'
 alias cdcd='cd /mnt/cdrom'
+alias cdmntcd='mount /dev/cdrom /mnt/cdrom;cd /mnt/cdrom'
 
 # extract:  Extract most know archives with one command
 # ---------------------------------------------------------
@@ -114,7 +115,7 @@ phase () {
     pattern="Illumination:"
     illum="$( curl -s "$url" | grep "$pattern" | tr ',' '\
     ' | grep "$pattern" | sed 's/[^0-9]//g')"
-    if [ $illum -eq 0 ] then
+    if [ $illum -eq 0 ] ; then
         phasename="new"
     elif [ $illum -eq 50 ] ; then
         phasename="quarter"
