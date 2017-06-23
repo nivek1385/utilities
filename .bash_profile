@@ -113,7 +113,10 @@ phase () {
     pattern="Illumination:"
     illum="$( curl -s "$url" | grep "$pattern" | tr ',' '\
     ' | grep "$pattern" | sed 's/[^0-9]//g')"
-    if [ $illum -eq 0 ] ; then
+    if [ $illum = "" ] ; then
+        echo "Error retrieving moon illumination from web."
+        return 1
+    elif [ $illum -eq 0 ] ; then
         phasename="new"
     elif [ $illum -eq 50 ] ; then
         phasename="quarter"
