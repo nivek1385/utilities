@@ -10,8 +10,6 @@ fi
 PATH=${HOME}/bin:$PATH
 export JAVA_HOME=/opt/omega/java
 export PATH=${JAVA_HOME}/bin:$PATH
-export MVN_HOME=/opt/omega/maven
-export PATH+=':${MVN_HOME}/bin'
 export PATH
 #source ~/khsvn/svn-khartley.sh
 alias shy='ssh -Y'
@@ -20,8 +18,8 @@ alias gist='history | grep'
 alias gs='git status'
 # do not create history entries for the following commands
 export HISTIGNORE='&:[ ]*:exit:ls:bg:fg:jobs:history:clear:pwd'
-alias dtstamp="date +'%G%m%d%H%M%S'"
-alias dstamp="date +'%G%m%d'"
+alias dtstamp="date +'%Y%m%d%H%M%S'"
+alias dstamp="date +'%Y%m%d'"
 alias tstamp="date +'%H%M%S'"
 cd() { builtin cd "$@"; pwd; echo; ls; } #cd changes directory, prints current (new) dir, prints newline, lists contents of (new) dir
 alias cdmnt='mount /dev/cdrom /mnt/cdrom'
