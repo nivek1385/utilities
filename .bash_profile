@@ -108,3 +108,28 @@ esac
 alias reload='source ~/.bash_profile'
 # grabs the latest .bash_profile file and reloads the prompt
 alias updatebashprofile='curl -L https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload'
+
+phase () {
+    url="http://www.moongiant.com/phase/today"
+    pattern="Illumination:"
+    illum="$( curl -s "$url" | grep "$pattern" | tr ',' '\
+    ' | grep "$pattern" | sed 's/[^0-9]//g')"
+    if [ $illum -eq 0 ] then
+        phasename="new"
+    elif [ $illum -eq 50 ] ; then
+        phasename="quarter"
+    elif [ $illum -eq 100 ] ; then
+        phasename="full"
+    elif [ $illum -lt 5 ] ; then
+        phasename="new-ish"
+    elif [ $illum -lt 45 ] ; then
+        phasename="crescent"
+    elif [ $illum -lt 55 ] ; then
+        phasename="quarter-ish"
+    elif [ $illum -lt 95 ] ; then
+        phasename="gibbous"
+    else
+        phasename="full-ish"
+    fi
+    echo "The moon is currently $phasename with $illum% illuminated."
+}
