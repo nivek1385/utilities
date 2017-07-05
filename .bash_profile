@@ -1,9 +1,9 @@
 # .bash_profile
 
 # Get the aliases and functions
-if [ -f ~/.bashrc ]; then
-        . ~/.bashrc
-fi
+#if [ -f ~/.bashrc ]; then
+#        . ~/.bashrc
+#fi
 
 # User specific environment and startup programs
 
@@ -86,7 +86,7 @@ fi
 case $distro in
         "LinuxMint")
                 #Do Mint specific items
-                alias apu="sudo apt-get update"
+                alias apu="sudo apt-get update && sudo apt-get upgrade"
                 alias api="sudo apt-get install "
                 ;;
         "CentOS")
@@ -94,7 +94,7 @@ case $distro in
                 alias yumu="yum update "
                 alias yumi="yum install "
                 ;;
-        Redhat*)
+        "Redhat*")
                 #Do RHEL specific items
                 alias yumu="yum update "
                 alias yumi="yum install "
