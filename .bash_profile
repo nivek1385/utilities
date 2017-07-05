@@ -105,7 +105,7 @@ case $distro in
 esac
 
 # reloads the prompt, useful to take new modifications into account
-alias reload='source ~/.bash_rc'
+alias reload='source ~/.bashrc'
 # grabs the latest .bashrc\.bash_profile file and reloads the prompt
 alias updatebashrc='curl -L https://github.com/nivek1385/utilities/raw/master/.bashrc > ~/.bashrc && reload'
 alias updatebashprofile='curl -L https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload'
