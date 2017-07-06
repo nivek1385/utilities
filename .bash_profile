@@ -1,33 +1,44 @@
 # .bash_profile
 
-# Get the aliases and functions
-#if [ -f ~/.bashrc ]; then
-#        . ~/.bashrc
-#fi
-
 # User specific environment and startup programs
-
 PATH=${HOME}/bin:$PATH
+
+#Exports
 export JAVA_HOME=/opt/omega/java
 export PATH=${JAVA_HOME}/bin:$PATH
 export PATH
-#source ~/khsvn/svn-khartley.sh
+# do not create history entries for the following commands
+export HISTIGNORE='&:[ ]*:exit:ls:bg:fg:jobs:history:clear:pwd'
+
+#Aliases
 alias shy='ssh -Y'
 alias sl='ls'
 alias gist='history | grep'
 alias gs='git status'
-# do not create history entries for the following commands
-export HISTIGNORE='&:[ ]*:exit:ls:bg:fg:jobs:history:clear:pwd'
 alias dtstamp="date +'%Y%m%d%H%M%S'"
 alias dstamp="date +'%Y%m%d'"
 alias tstamp="date +'%H%M%S'"
-cd() { builtin cd "$@"; pwd; echo; ls; } #cd changes directory, prints current (new) dir, prints newline, lists contents of (new) dir
 alias cdmnt='mount /dev/cdrom /mnt/cdrom'
 alias cdcd='cd /mnt/cdrom'
 alias cdmntcd='mount /dev/cdrom /mnt/cdrom;cd /mnt/cdrom'
+alias mnt='mount | column -t'
+# Find a file from the current directory
+alias ff='find . -name '
+# Find a file from root
+alias fr='find / -name '
+# count # of lines
+alias wcl='wc -l'
+# reloads the prompt, useful to take new modifications into account
+alias reload='source ~/.bashrc'
+# grabs the latest .bashrc\.bash_profile file and reloads the prompt
+alias updatebashrc='curl -L https://github.com/nivek1385/utilities/raw/master/.bashrc > ~/.bashrc && reload'
+alias updatebashprofile='curl -L https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload'
+
+#Functions
+#cd changes directory, prints current (new) dir, prints newline, lists contents of (new) dir
+cd() { builtin cd "$@"; pwd; echo; ls; }
 
 # extract:  Extract most know archives with one command
-# ---------------------------------------------------------
 extract () {
     if [ -f $1 ] ; then # -f means file exists and is a regular file
         case $1 in
@@ -48,12 +59,8 @@ extract () {
         echo "'$1' is not a valid file"
     fi
 }
-alias mnt='mount | column -t'
-# Find a file from the current directory
-alias ff='find . -name '
-# Find a file from root
-alias fr='find / -name '
 
+#ip: Provides public and private IP addresses. Without interface specified, defaults to iface of default route
 ip () {
 whoami
 echo -e \ - Public facing IP Address:
@@ -73,8 +80,6 @@ else
         echo "No IP address found for interface $int"
 fi
 }
-
-alias wcl='wc -l'        # count # of lines
 
 #Set distro specific settings
 if [ -e /etc/redhat-release ]; then
@@ -98,17 +103,12 @@ case $distro in
                 #Do RHEL specific items
                 alias yumu="yum update "
                 alias yumi="yum install "
+                source ~/khsvn/svn-khartley.sh
                 ;;
         *)
                 #Do non-specific items
                 ;;
 esac
-
-# reloads the prompt, useful to take new modifications into account
-alias reload='source ~/.bashrc'
-# grabs the latest .bashrc\.bash_profile file and reloads the prompt
-alias updatebashrc='curl -L https://github.com/nivek1385/utilities/raw/master/.bashrc > ~/.bashrc && reload'
-alias updatebashprofile='curl -L https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload'
 
 phase () {
     url="http://www.moongiant.com/phase/today"
