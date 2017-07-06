@@ -38,7 +38,7 @@ alias updatebashprofile='curl -L https://github.com/nivek1385/utilities/raw/mast
 #cd changes directory, prints current (new) dir, prints newline, lists contents of (new) dir
 cd() { builtin cd "$@"; pwd; echo; ls; }
 
-# extract:  Extract most know archives with one command
+# extract:  Extract most known archives with one command
 extract () {
     if [ -f $1 ] ; then # -f means file exists and is a regular file
         case $1 in
