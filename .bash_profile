@@ -138,12 +138,12 @@ phase () {
     echo "The moon is currently $phasename with $illum% illuminated."
 }
 
+#Provides weather forecast. With a ZIP code or city location, will provide weather forecast for said ZIP/city
 weather () {
     url="wttr.in/"
-    if [ $# -eq 0 ]
-    then
-        curl $url$(1)
+    if [ $# -eq 0 ] then
+        curl url$(1)
     else
-        curl $url
+        curl url
     fi   
 }
