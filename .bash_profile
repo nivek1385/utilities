@@ -148,3 +148,48 @@ weather () {
         curl $url
     fi   
 }
+
+#Update bash dot files
+dotupdate () {
+    #check for params rc vs prof
+    #no params = do both
+    if [ $# -eq 0 ] ; then
+        echo "No dot files selected, updating both."
+        for i in ".bashrc" ".bash_profile"
+        do
+            if [ -L ~/$i ]; then
+                #update git repo and reload
+                echo "File $i is a symlink, will have to update git repo."
+                cd ~/utilities || exit
+                git pull
+            else
+                #update file directly
+                echo "File $i is NOT a symlink, updating directly."
+                curl -L https://github.com/nivek1385/utilities/raw/master/$i > ~/$i
+            fi
+        done
+        reload
+    else
+        #Test what param is
+        echo "TEST TEST TEST Don't have the param test done for actual params yet"
+        case "$1" in
+            .bashrc | bashrc )
+                file=.bashrc
+            ;;
+            .bash_profile | bash_profile | .bashprof | bashprof )
+                file=.bash_profile
+            ;;
+        esac
+        if [ -L ~/$file ]; then
+            #update git repo and reload
+            echo "File $file is a symlink, will have to update git repo."
+            cd ~/utilities || exit
+            git pull
+        else
+            #update file directly
+            echo "File $file is NOT a symlink, updating directly."
+            curl -L https://github.com/nivek1385/utilities/raw/master/$file > ~/$fi
+le
+        fi
+    fi
+}
