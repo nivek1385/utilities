@@ -188,8 +188,7 @@ dotupdate () {
         else
             #update file directly
             echo "File $file is NOT a symlink, updating directly."
-            curl -L https://github.com/nivek1385/utilities/raw/master/$file > ~/$fi
-le
+            curl -L https://github.com/nivek1385/utilities/raw/master/$file > ~/$file
         fi
     fi
 }
