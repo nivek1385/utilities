@@ -171,7 +171,6 @@ dotupdate () {
         reload
     else
         #Test what param is
-        echo "TEST TEST TEST Don't have the param test done for actual params yet"
         case "$1" in
             .bashrc | bashrc )
                 file=.bashrc
