@@ -137,3 +137,13 @@ phase () {
     fi
     echo "The moon is currently $phasename with $illum% illuminated."
 }
+
+weather () {
+    url="wttr.in/"
+    if [ $# -eq 0 ]
+    then
+        curl url$(1)
+    else
+        curl url
+    fi   
+}
