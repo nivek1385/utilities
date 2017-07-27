@@ -11,6 +11,7 @@ export PATH
 export HISTIGNORE='&:[ ]*:exit:ls:bg:fg:jobs:history:clear:pwd'
 
 #Aliases
+alias cls='clear'
 alias shy='ssh -Y'
 alias sl='ls'
 alias gist='history | grep'
