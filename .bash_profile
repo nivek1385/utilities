@@ -143,9 +143,9 @@ phase () {
 weather () {
     url="wttr.in/"
     if [ $# -eq 0 ] ; then
-        curl $url$(1)
-    else
         curl $url
+    else
+        curl $url$(1)
     fi   
 }
 
