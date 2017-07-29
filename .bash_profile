@@ -146,7 +146,7 @@ weather () {
     if [ $# -eq 0 ] ; then
         curl $url
     else
-        curl $url$(1)
+        curl $url${1}
     fi   
 }
 
