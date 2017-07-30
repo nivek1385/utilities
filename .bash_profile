@@ -193,4 +193,9 @@ dotupdate () {
     fi
 }
 
+posttofb () {
+    key=deEcaUi7u8AXM30ejeNEz2
+    curl --globoff -X POST "https://maker.ifttt.com/trigger/post_facebook/with/key/${key}?value1=$1"
+}
+
 fortune
