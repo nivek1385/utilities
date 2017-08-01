@@ -137,7 +137,13 @@ phase () {
         phasename="full-ish"
     fi
     echo "The moon is currently $phasename with $illum% illuminated."
-    weather Moon
+    if [ $# -eq 0 ] ; then
+        weather Moon
+    elif [ $1 = "png" ] ; then
+        weather Moon.png >> moon.png
+    elif [ $1 = "nowttr" ] ; then
+        echo ""
+    fi
 }
 
 #Provides weather forecast. With a ZIP code or city location, will provide weather forecast for said ZIP/city
@@ -196,6 +202,12 @@ dotupdate () {
 posttofb () {
     key=deEcaUi7u8AXM30ejeNEz2
     curl --globoff -X POST "https://maker.ifttt.com/trigger/post_facebook/with/key/${key}?value1=$1"
+}
+
+phasetofb () {
+    phase png
+    python send.py "nivek1385@yeltrahnivek.com" "Moon Phase Script" "$(phase nowttr)" "moon.png"
+    rm moon.png
 }
 
 fortune
