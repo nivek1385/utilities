@@ -204,10 +204,4 @@ posttofb () {
     curl --globoff -X POST "https://maker.ifttt.com/trigger/post_facebook/with/key/${key}?value1=$1"
 }
 
-phasetofb () {
-    phase png
-    python send.py "nivek1385@yeltrahnivek.com" "Moon Phase Script" "$(phase nowttr)" "moon.png"
-    rm moon.png
-}
-
 fortune
