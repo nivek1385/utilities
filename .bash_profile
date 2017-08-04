@@ -16,6 +16,7 @@ alias shy='ssh -Y'
 alias sl='ls'
 alias gist='history | grep'
 alias gs='git status'
+alias ga='git add'
 alias dtstamp="date +'%Y%m%d%H%M%S'"
 alias dstamp="date +'%Y%m%d'"
 alias tstamp="date +'%H%M%S'"
@@ -31,9 +32,7 @@ alias fr='find / -name '
 alias wcl='wc -l'
 # reloads the prompt, useful to take new modifications into account
 alias reload='source ~/.bashrc'
-# grabs the latest .bashrc\.bash_profile file and reloads the prompt
-#alias updatebashrc='curl -L https://github.com/nivek1385/utilities/raw/master/.bashrc > ~/.bashrc && reload'
-#alias updatebashprofile='curl -L https://github.com/nivek1385/utilities/raw/master/.bash_profile > ~/.bash_profile && reload'
+alias lsfn='declare -f'
 
 #Functions
 #cd changes directory, prints current (new) dir, prints newline, lists contents of (new) dir
