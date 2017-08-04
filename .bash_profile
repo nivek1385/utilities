@@ -175,6 +175,7 @@ dotupdate () {
                 curl -L https://github.com/nivek1385/utilities/raw/master/$i > ~/$i
             fi
         done
+        pause "Press enter to reload."
         reload
     else
         #Test what param is
@@ -202,6 +203,10 @@ dotupdate () {
 posttofb () {
     key=deEcaUi7u8AXM30ejeNEz2
     curl --globoff -X POST "https://maker.ifttt.com/trigger/post_facebook/with/key/${key}?value1=$1"
+}
+
+pause () {
+    read -p "$*"
 }
 
 fortune
