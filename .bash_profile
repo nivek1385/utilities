@@ -114,8 +114,16 @@ phase () {
     url="http://www.moongiant.com/phase/today"
     pattern="Illumination:"
     illum="$( curl -s "$url" | grep "$pattern" | tr ',' '\
-    ' | grep "$pattern" | sed 's/[^0-9]//g')"
-    if [ $illum = "" ] ; then
+    ' | grep "$pattern" | sed 's/[^0-9]//g')";
+    url="http://www.moongiant.com/phase/$(date -dyesterday +%-m/%-d/%Y)";
+    yillum="$( curl -s "$url" | grep "$pattern" | tr ',' '\
+    ' | grep "$pattern" | sed 's/[^0-9]//g')";
+    if [ $yillum -gt $illum ] ; then
+        waxing="waning";
+    else
+        waxing="waxing";
+    fi
+    if [ $illum = "" ] || [ $yillum = "" ] ; then
         echo "Error retrieving moon illumination from web."
         return 1
     elif [ $illum -eq 0 ] ; then
@@ -125,15 +133,15 @@ phase () {
     elif [ $illum -eq 100 ] ; then
         phasename="full"
     elif [ $illum -lt 5 ] ; then
-        phasename="new-ish"
+        phasename="$waxing, and not quite new"
     elif [ $illum -lt 45 ] ; then
-        phasename="crescent"
+        phasename="$waxing crescent"
     elif [ $illum -lt 55 ] ; then
-        phasename="quarter-ish"
+        phasename="$waxing, and not quite quarter"
     elif [ $illum -lt 95 ] ; then
-        phasename="gibbous"
+        phasename="$waxing gibbous"
     else
-        phasename="full-ish"
+        phasename="$waxing, and not quite full"
     fi
     echo "The moon is currently $phasename with $illum% illuminated."
     if [ $# -eq 0 ] ; then
