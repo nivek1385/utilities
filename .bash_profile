@@ -120,12 +120,14 @@ phase () {
     ' | grep "$pattern" | sed 's/[^0-9]//g')";
     if [ $yillum -gt $illum ] ; then
         waxing="waning";
-    else
+    elif [ $yillum -lt $illum ] ; then
         waxing="waxing";
+    else
+        waxing="reading as the same illumination percentage as yesterday, so unable to determine whether it is waxing or waning,"
     fi
     if [ $illum = "" ] || [ $yillum = "" ] ; then
         echo "Error retrieving moon illumination from web."
-        return 1
+        return
     elif [ $illum -eq 0 ] ; then
         phasename="new"
     elif [ $illum -eq 50 ] ; then
@@ -133,17 +135,17 @@ phase () {
     elif [ $illum -eq 100 ] ; then
         phasename="full"
     elif [ $illum -lt 5 ] ; then
-        phasename="$waxing, and not quite new"
+        phasename="$waxing, not quite new, and"
     elif [ $illum -lt 45 ] ; then
         phasename="$waxing crescent"
     elif [ $illum -lt 55 ] ; then
-        phasename="$waxing, and not quite quarter"
+        phasename="$waxing, not quite quarter, and"
     elif [ $illum -lt 95 ] ; then
         phasename="$waxing gibbous"
     else
-        phasename="$waxing, and not quite full"
+        phasename="$waxing and not quite full"
     fi
-    echo "The moon is currently $phasename with $illum% illuminated."
+    echo "The moon is currently $phasename with $illum% illumination."
     if [ $# -eq 0 ] ; then
         weather Moon
     elif [ $1 = "png" ] ; then
