@@ -1,0 +1,89 @@
+LeagueBegin
+	League:	ECHL	(Sort: Lottery)
+		Conference: Eastern (sort: Conf) (Playoffs: 8)
+			Division: North (sort: Div) (Playoffs: 4)
+				team: Manchester Monarchs (MAN)
+				team: Wheeling Nailers (WHL)
+				team: Reading Royals (REA)
+				team: Adirondack Thunder (ADK)
+				team: Brampton Beast (BRM)
+				team: Worcester Railers (WOR)
+		Conference: Eastern (sort: Conf) (Playoffs: 8)
+			Division: South (sort: Div) (Playoffs: 4)
+				team: Florida Everblades (FLA)
+				team: South Carolina Stingrays (SC)
+				team: Greenville Swamp Rabbits (GRN)
+				team: Atlanta Gladiators (ATL)
+				team: Orlando Solar Bears (ORL)
+				team: Norfolk Admirals (NOR)
+				team: Jacksonville Icemen (JAX)
+		Conference: Western (sort: Conf) (Playoffs: 8)
+			Division: Central (sort: Div) (Playoffs: 4)
+				team: Toledo Walleye (TOL)
+				team: Fort Wayne Komets (FW)
+				team: Cincinnati Cyclones (CIN)
+				team: Kansas City Mavericks (KC)
+				team: Kalamazoo Wings (KAL)
+				team: Indy Fuel (IND)
+				team: Quad City Mallards (QC)
+		Conference: Western (sort: Conf) (Playoffs: 8)
+			Division: Mountain (sort: Div) (Playoffs: 4)
+				team: Colorado Eagles (COL)
+				team: Wichita Thunder (WIC)
+				team: Idaho Steelheads (IDH)
+				team: Allen Americans (ALN)
+				team: Tulsa Oilers (TUL)
+				team: Utah Grizzlies (UTA)
+				team: Rapid City Rush (RC)
+	Kind: pro
+	Sport: hockey
+	Gender: male
+	Country: USA
+	State:
+	Level: AA
+	Season: 17-18 (current: True)
+	Author: Kevin Hartley
+	Note:
+	LotteryNote:
+LeagueEnd
+
+SortBegin
+	Div: Average Points, Points, WinsInRegulationorOvertime, GoalsDelta,
+Points HeadToHeadNHL, If [(All=SameParent) Average Wins SameParent],
+GoalsFor, DrawLots
+	Conf: MoveClinchedToFront, Average Points, Points,
+WinsInRegulationorOvertime, GoalsDelta, Points HeadToHeadNHL, If
+[(All=SameParent) Average Wins SameParent], GoalsFor, DrawLots
+	Lottery: MoveClinchedToFrontBySeed, Average Points, Points,
+WinsInRegulationOrOvertime, GoalsDelta, Points HeadToHeadNHL, If
+[(All=SameParent) Average Wins SameParent], GoalsFor, DrawLots
+SortEnd
+
+RulesBegin
+	PointsForWinInRegulation:	2
+	PointsForWinInOvertime:	2
+	PointsForWinInShootout:	2
+	PointsForLossInRegulation:	0
+	PointsForLossInOvertime:	1
+	PointsForLossInShootout:	1
+	PointsForTie:	0
+	PercentOfGamesThatEndInTie:	0
+	PercentOfGamesThatEndInOvertimeWin:	0.0828402366863905
+	PercentOfGamesThatEndInShootoutWin:	0.130177514792899
+	HomeFieldAdvantage:	0.571005917159763
+	WeightType:	PythagenpatIgnoreShootOutWinningGoals
+	WeightExponent:	0.458
+	WhatDoYouCallATie:	tie
+	WhatDoYouCallLottery:	lottery
+	WhatDoYouCallPromoted:	Brabham
+	Promote:	1
+	PromotePlus:	0
+	PromotePlusPercent:	0
+	WhatDoYouCallDemoted:	relegated
+	Demote:	0
+	DemotePlus:	0
+	DemotePlusPercent:	0
+RulesEnd
+
+GamesBegin
+TeamListedFirst: away
