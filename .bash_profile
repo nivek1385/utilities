@@ -66,7 +66,7 @@ whoami
 echo -e \ - Public facing IP Address:
 curl ipecho.net/plain
 echo
-echo -e \ - Internal IP Address: 
+echo -e \ - Internal IP Address:
 if [ $# -eq 0 ]
   then
         int=$(route | grep '^default' | grep -o '[^ ]*$')
@@ -145,7 +145,7 @@ phase () {
     else
         phasename="$waxing and not quite full"
     fi
-    echo "The moon is currently $phasename with $illum% illumination."
+    echo "The moon phase is currently $phasename with $illum% illumination."
     if [ $# -eq 0 ] ; then
         weather Moon
     elif [ $1 = "png" ] ; then
@@ -162,7 +162,7 @@ weather () {
         curl $url
     else
         curl $url${1}
-    fi   
+    fi
 }
 
 #Update bash dot files
