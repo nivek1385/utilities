@@ -2,8 +2,45 @@
 #ECHL Parser for SportsClubStats
 
 cd ~/utilities/ECHLparser
-wget "http://cluster.leaguestat.com/feed/index.php?feed=chlpremium&key=dfd0ffe484e007d9&client_code=echl&sub=teams" -O teams.xml
-wget "http://cluster.leaguestat.com/feed/index.php?feed=chlpremium&key=dfd0ffe484e007d9&client_code=echl&sub=schedule" -O schedule.xml
+note=""
+case $1 in
+	"06-07")
+		seasonid=1
+		;;
+	"07-08")
+		seasonid=5
+		;;
+	"08-09")
+		seasonid=9
+		note="Playoff tiebreakers are not configured properly due to mid-season folding of teams."
+		;;
+	"09-10")
+		seasonid=13
+		;;
+	"10-11")
+		seasonid=17
+		;;
+	"11-12")
+		seasonid=22
+		;;
+	"12-13")
+		seasonid=25
+		;;
+	"13-14")
+		seasonid=29
+		;;
+	"14-15")
+		seasonid=33
+		;;
+	"15-16")
+		seasonid=37
+		;;
+	"16-17")
+		seasonid=40
+		;;
+esac
+wget "http://cluster.leaguestat.com/feed/index.php?feed=chlpremium&key=dfd0ffe484e007d9&client_code=echl&sub=teams&season_id=$seasonid" -O teams.xml
+wget "http://cluster.leaguestat.com/feed/index.php?feed=chlpremium&key=dfd0ffe484e007d9&client_code=echl&sub=schedule&season_id=$seasonid" -O schedule.xml
 
 xmlstarlet pyx teams.xml > team.txt #convert xml to pyx format
 xmlstarlet pyx schedule.xml > schedule.txt #convert xml to pyx format
@@ -28,7 +65,7 @@ sed -i 's/^team_code-/(/g' echl.txt
 sed -i ':r;$!{N;br};s/\n(/ (/g' echl.txt
 sed -i '/^season_id.*/,+2d' echl.txt
 sed -i '/^required_copyright.*/,+6d' echl.txt
-sed -i '1s;^;LeagueBegin\n\tLeague:\tECHL\t(Sort: Conf)\n;' echl.txt
+sed -i '1s;^;LeagueBegin\n\tLeague:\tECHL\t(Sort: Lottery)\n;' echl.txt
 sed -i 's/^conference-/\t\tConference: /g' echl.txt
 sed -i '/Conference:/ s/$/ (sort: Conf) (Playoffs: 8)/' echl.txt
 sed -i 's/^division-/\t\t\tDivision: /g' echl.txt
@@ -41,9 +78,9 @@ echo -e "\tKind: pro
 \tCountry: USA
 \tState:
 \tLevel: AA
-\tSeason: 17-18 (current: True)
+\tSeason: $1 (current: false)
 \tAuthor: Kevin Hartley
-\tNote:
+\tNote:$note
 \tLotteryNote:
 LeagueEnd
 
@@ -59,34 +96,6 @@ WinsInRegulationOrOvertime, GoalsDelta, Points HeadToHeadNHL, If
 [(All=SameParent) Average Wins SameParent], GoalsFor, DrawLots
 SortEnd
 " >> echl.txt
-echo -e "RulesBegin
-	PointsForWinInRegulation:	2
-	PointsForWinInOvertime:	2
-	PointsForWinInShootout:	2
-	PointsForLossInRegulation:	0
-	PointsForLossInOvertime:	1
-	PointsForLossInShootout:	1
-	PointsForTie:	0
-	PercentOfGamesThatEndInTie:	0
-	PercentOfGamesThatEndInOvertimeWin:	0.0828402366863905
-	PercentOfGamesThatEndInShootoutWin:	0.130177514792899
-	HomeFieldAdvantage:	0.571005917159763
-	WeightType:	PythagenpatIgnoreShootOutWinningGoals
-	WeightExponent:	0.458
-	WhatDoYouCallATie:	tie
-	WhatDoYouCallLottery:	lottery
-	WhatDoYouCallPromoted:	Brabham
-	Promote:	1
-	PromotePlus:	0
-	PromotePlusPercent:	0
-	WhatDoYouCallDemoted:	relegated
-	Demote:	0
-	DemotePlus:	0
-	DemotePlusPercent:	0
-RulesEnd
-" >> echl.txt
-echo -e "GamesBegin
-TeamListedFirst: away" >> echl.txt
 
 sed -i 's/-\\n//g' schedule.txt
 sed -i '/^ *$/d' schedule.txt #Remove empty lines
@@ -124,12 +133,47 @@ sed -i 's/-&-nbsp;/ (/g' schedule.txt
 sed -i '/(.*/ s/$/)/' schedule.txt
 sed -i ':r;$!{N;br};s/\nhome_team_code-/ /g' schedule.txt
 sed -i ':r;$!{N;br};s/\nvisiting_team_code-/ /g' schedule.txt
+numgames=$(wc -l <schedule.txt)
+numotgames=$(grep "(OT)" schedule.txt | wc -l)
+numsogames=$(grep "(SO)" schedule.txt | wc -l)
+otpercent=$(bc <<< "scale = 16; $numotgames/$numgames")
+sopercent=$(bc <<< "scale = 16; $numsogames/$numgames")
+echo -e "RulesBegin
+	PointsForWinInRegulation:	2
+	PointsForWinInOvertime:	2
+	PointsForWinInShootout:	2
+	PointsForLossInRegulation:	0
+	PointsForLossInOvertime:	1
+	PointsForLossInShootout:	1
+	PointsForTie:	0
+	PercentOfGamesThatEndInTie:	0
+	PercentOfGamesThatEndInOvertimeWin:	$otpercent
+	PercentOfGamesThatEndInShootoutWin:	$sopercent
+	HomeFieldAdvantage:	0.571005917159763
+	WeightType:	PythagenpatIgnoreShootOutWinningGoals
+	WeightExponent:	0.458
+	WhatDoYouCallATie:	tie
+	WhatDoYouCallLottery:	lottery
+	WhatDoYouCallPromoted:	Brabham
+	Promote:	1
+	PromotePlus:	0
+	PromotePlusPercent:	0
+	WhatDoYouCallDemoted:	relegated
+	Demote:	0
+	DemotePlus:	0
+	DemotePlusPercent:	0
+RulesEnd
+" >> echl.txt
+echo -e "GamesBegin
+TeamListedFirst: away" >> echl.txt
 cat schedule.txt >> echl.txt
 echo -e "GamesEnd" >> echl.txt
 sed -i 's/IDH/Steelheads/g' echl.txt
+sed -i 's/pm AKST/pm/g' echl.txt
+sed -i 's/am AKST/pm/g' echl.txt
 sed -i 's/pm .ST/pm/g' echl.txt
 sed -i 's/am .ST/pm/g' echl.txt
 sed -i 's|\([0-9][0-9][0-9][0-9]\)-\([0-1][0-9]\)-\([0-3][0-9]\)|\2/\3/\1|g' echl.txt
 # sed -i -e '11d' echl.txt
 # sed -i -e '28d' echl.txt
-python ~/bin/send.py "import@sportsclubstats.com" "ECHL" "$(cat echl.txt)" "echl.txt"
+python ~/bin/send.py "import@sportsclubstats.com" "ECHL $1" "$(cat echl.txt)" "echl.txt"

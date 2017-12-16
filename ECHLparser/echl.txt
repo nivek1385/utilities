@@ -1,10 +1,10 @@
 LeagueBegin
-	League:	ECHL	(Sort: Lottery)
+	League:	ECHL	(Sort: Conf)
 		Conference: Eastern (sort: Conf) (Playoffs: 8)
 			Division: North (sort: Div) (Playoffs: 4)
 				team: Manchester Monarchs (MAN)
-				team: Wheeling Nailers (WHL)
 				team: Reading Royals (REA)
+				team: Wheeling Nailers (WHL)
 				team: Adirondack Thunder (ADK)
 				team: Brampton Beast (BRM)
 				team: Worcester Railers (WOR)
@@ -19,8 +19,8 @@ LeagueBegin
 		Conference: Western (sort: Conf) (Playoffs: 8)
 			Division: Central (sort: Div) (Playoffs: 4)
 				team: Toledo Walleye (TOL)
-				team: Fort Wayne Komets (FW)
 				team: Cincinnati Cyclones (CIN)
+				team: Fort Wayne Komets (FW)
 				team: Kansas City Mavericks (KC)
 				team: Kalamazoo Wings (KAL)
 				team: Indy Fuel (IND)
@@ -401,15 +401,15 @@ TeamListedFirst: away
 12/13/2017 7:05 pm WIC  3-4 COL
 12/13/2017 7:10 pm RC  2-5 Steelheads
 12/14/2017 7:05 pm QC  1-2 IND
-12/15/2017 7:00 pm MAN   GRN
-12/15/2017 7:00 pm ATL   KAL
-12/15/2017 7:00 pm WHL   REA
-12/15/2017 7:00 pm WOR   ADK
-12/15/2017 7:00 pm ORL   NOR
-12/15/2017 7:15 pm TOL   BRM
+12/15/2017 7:00 pm MAN  3-4 GRN
+12/15/2017 7:00 pm ATL  3-6 KAL
+12/15/2017 7:00 pm WHL  0-4 REA
+12/15/2017 7:00 pm WOR  4-3 ADK
+12/15/2017 7:00 pm ORL  2-4 NOR
+12/15/2017 7:15 pm TOL  5-2 BRM
 12/15/2017 7:30 pm MAN   GRN
 12/15/2017 7:30 pm SC   FLA
-12/15/2017 7:35 pm QC   CIN
+12/15/2017 7:35 pm QC  1-6 CIN
 12/15/2017 8:00 pm IND   FW
 12/15/2017 7:05 pm COL   TUL
 12/15/2017 7:05 pm RC   UTA
