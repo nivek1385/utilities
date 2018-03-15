@@ -17,9 +17,9 @@ day=$(date +%d)
 month=$(date +%b)
 year=$(date +%Y)
 
-day=25
+#day=25
 #month="Feb"
-year=2016
+#year=2016
 
 one=1
 case $month in
