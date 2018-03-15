@@ -22,5 +22,5 @@ else
 fi
 nxtriseorset=$(grep -A 6 "Next Moon$riseorset:" moon.txt | tail -n 3)
 nxtriseorset=$(echo $nxtriseorset | sed 's/<\/span>//g')
-echo "The moon phase is currently $phase with $illum% illuminated. The next moon$riseorset is $nxtriseorset. The current direction is $dir with an altitude of $alt at a distance of $dist. The next full moon is $nxtfull; the next new moon is $nxtnew. N.B. All dates and times are for Rockville, MD." | sed 's/  / /g' | sed 's/°/ degrees/g'
+echo "The moon phase is currently $phase with $illum% illuminated. The next moon$riseorset is $nxtriseorset. The current direction is $dir with an altitude of $alt at a distance of $dist. The next full moon is $nxtfull; the next new moon is $nxtnew. N.B. All dates and times are for Rockville, MD." | sed 's/  / /g' | sed 's/°/ degrees/g' | sed 's/%%/%/g'
 rm moon.txt
