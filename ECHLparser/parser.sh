@@ -43,7 +43,7 @@ echo -e "\tKind: pro
 \tLevel: AA
 \tSeason: 17-18 (current: True)
 \tAuthor: Kevin Hartley
-\tNote:
+\tNote: Automation via bash scripting and the ECHL's Leaguestat XML. Updated script as of 2018-03-15 takes into account the current home win, OT, and SO percentages for the league.
 \tLotteryNote:
 LeagueEnd
 
@@ -68,9 +68,9 @@ echo -e "RulesBegin
 	PointsForLossInShootout:	1
 	PointsForTie:	0
 	PercentOfGamesThatEndInTie:	0
-	PercentOfGamesThatEndInOvertimeWin:	0.0828402366863905
-	PercentOfGamesThatEndInShootoutWin:	0.130177514792899
-	HomeFieldAdvantage:	0.571005917159763
+	PercentOfGamesThatEndInOvertimeWin:	OTPERCENT
+	PercentOfGamesThatEndInShootoutWin:	SOPERCENT
+	HomeFieldAdvantage: HMPERCENT	
 	WeightType:	PythagenpatIgnoreShootOutWinningGoals
 	WeightExponent:	0.458
 	WhatDoYouCallATie:	tie
@@ -132,4 +132,15 @@ sed -i 's/am .ST/pm/g' echl.txt
 sed -i 's|\([0-9][0-9][0-9][0-9]\)-\([0-1][0-9]\)-\([0-3][0-9]\)|\2/\3/\1|g' echl.txt
 # sed -i -e '11d' echl.txt
 # sed -i -e '28d' echl.txt
+gp=$(grep -c "-" echl.txt)
+otgp=$(grep -c "(OT)" echl.txt)
+sogp=$(grep -c "(SO)" echl.txt)
+hmgw=$(grep "-" echl.txt | grep -v "(..)" | awk 'BEGIN{FS=OFS=" "}{print $5}' | bc | grep -c "-")
+reggp=$(grep "-" echl.txt | grep -vc "(..)")
+hmpercent=$(bc -l <<< "$hmgw/$reggp")
+otpercent=$(bc -l <<< "$otgp/$gp")
+sopercent=$(bc -l <<< "$sogp/$gp")
+sed -i "s/HMPERCENT/$hmpercent/g" echl.txt
+sed -i "s/OTPERCENT/$otpercent/g" echl.txt
+sed -i "s/SOPERCENT/$sopercent/g" echl.txt
 python ~/bin/send.py "import@sportsclubstats.com" "ECHL" "$(cat echl.txt)" "echl.txt"
