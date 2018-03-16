@@ -118,7 +118,7 @@ elif [[ $day -ge 2 && $day -lt $((nones - one)) ]]; then
             ;;
     esac
     num=$((nones - day + one))
-    num=$(./num2roman.sh $num)
+    num=$(~/utilities/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Nonas $latmon "
 elif [[ $day -gt $nones && $day -lt $((ides - one)) ]]; then
@@ -161,7 +161,7 @@ elif [[ $day -gt $nones && $day -lt $((ides - one)) ]]; then
             ;;
     esac
     num=$((ides - day + one))
-    num=$(./num2roman.sh $num)
+    num=$(~/utilities/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     latindate="Hodie est ante diem $num Idus $latmon "
 elif [[ $day == $((nones - one)) ]]; then
@@ -300,7 +300,7 @@ elif [[ $day -gt $ides ]]; then
             ;;
     esac
     num=$((numdays - day + one)) #Add one for Roman-style inclusive counting
-    num=$(./num2roman.sh $num)
+    num=$(~/utilities/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
     if [[ $num == 2 ]]; then
         latindate="Hodie est pridie Kalendas $latmon "
@@ -311,5 +311,5 @@ else
     echo "ERROR: day var didn't match any if statement."
 fi
 aucyear=$(toAUC $year)
-convyear=$(./num2roman.sh $aucyear)
+convyear=$(~/utilities/num2roman.sh $aucyear)
 echo "$latindate$convyear a.u.c."
