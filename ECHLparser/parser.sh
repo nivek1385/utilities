@@ -135,7 +135,7 @@ sed -i 's|\([0-9][0-9][0-9][0-9]\)-\([0-1][0-9]\)-\([0-3][0-9]\)|\2/\3/\1|g' ech
 gp=$(grep -c "-" echl.txt)
 otgp=$(grep -c "(OT)" echl.txt)
 sogp=$(grep -c "(SO)" echl.txt)
-hmgw=$(grep "-" echl.txt | grep -v "(..)" | awk 'BEGIN{FS=OFS=" "}{print $5}' | awk -F '-' '($2>$1) {print $0}' | wc -l)
+hmgw=$(awk '/-/ && !/\(..\)/ { split($5, a, "-"); if (a[1] < a[2]) { count++ } } END{ print count }' echl.txt)
 reggp=$(grep "-" echl.txt | grep -vc "(..)")
 hmpercent=$(bc -l <<< "$hmgw/$reggp")
 otpercent=$(bc -l <<< "$otgp/$gp")
