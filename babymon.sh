@@ -11,7 +11,7 @@ if [[ $tf < 60 ]]; then
   wget "https://maker.ifttt.com/trigger/RaiseTemp/with/key/deEcaUi7u8AXM30ejeNEz2" -O /dev/null
 elif [[ $tf -ge 60 && $tf < 75 ]]; then
   echo "Between 60 and 75, doing nothing."
-elif [ $tf -ge 75 ]]; then
+elif [[ $tf -ge 75 ]]; then
   echo "75 or HIGHER, executing web script to lower temp..."
   wget "https://maker.ifttt.com/trigger/LowerTemp/with/key/deEcaUi7u8AXM30ejeNEz2" -O /dev/null
 else
