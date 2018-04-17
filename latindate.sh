@@ -30,7 +30,7 @@ case $month in
         ides=13
 esac
 nones=$((ides-8))
-if [[ $day == $one || $day == $nones || $day == $ides ]]; then
+if [[ $day == "$one" || $day == "$nones" || $day == "$ides" ]]; then
     case $month in
         "Jan")
             latmon="Ianuariis"
@@ -69,11 +69,11 @@ if [[ $day == $one || $day == $nones || $day == $ides ]]; then
             latmon="Decembribus"
             ;;
     esac
-    if [[ $day == $one ]]; then
+    if [[ $day == "$one" ]]; then
         latindate="Hodie est Kalendis $latmon "
-    elif [[ $day == $nones ]]; then
+    elif [[ $day == "$nones" ]]; then
         latindate="Hodie est Nonis $latmon "
-    elif [[ $day == $ides ]]; then
+    elif [[ $day == "$ides" ]]; then
         latindate="Hodie est Idibus $latmon "
     else
         echo "ERROR: day variable isn't 1, Nones, or Ides, but was at one point."
@@ -252,7 +252,7 @@ elif [[ $day -gt $ides ]]; then
             ;;
         "Feb")
             latmon="Martias"
-            if [[ $(isLeap $year) == "It's a leap year" ]]; then
+            if [[ $(isLeap "$year") == "It's a leap year" ]]; then
                 numdays=30
             else
                 numdays=29
@@ -310,6 +310,6 @@ elif [[ $day -gt $ides ]]; then
 else
     echo "ERROR: day var didn't match any if statement."
 fi
-aucyear=$(toAUC $year)
-convyear=$(~/utilities/num2roman.sh $aucyear)
+aucyear=$(toAUC "$year")
+convyear=$(~/utilities/num2roman.sh "$aucyear")
 echo "$latindate$convyear a.u.c."
