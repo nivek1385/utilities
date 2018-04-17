@@ -39,4 +39,4 @@ sed -i 's/year=//g' seasons.txt
 sed -i 's/id=//g' seasons.txt
 
 id=$(grep "\"$1\";" seasons.txt | sed 's/.*;//g')
-echo $id
+echo "$id"

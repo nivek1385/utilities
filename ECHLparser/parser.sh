@@ -1,7 +1,7 @@
 #!/bin/bash
 #ECHL Parser for SportsClubStats
 
-cd ~/utilities/ECHLparser
+cd ~/utilities/ECHLparser || exit
 wget "http://cluster.leaguestat.com/feed/index.php?feed=chlpremium&key=dfd0ffe484e007d9&client_code=echl&sub=teams" -O teams.xml
 wget "http://cluster.leaguestat.com/feed/index.php?feed=chlpremium&key=dfd0ffe484e007d9&client_code=echl&sub=schedule" -O schedule.xml
 
@@ -35,30 +35,31 @@ sed -i 's/^division-/\t\t\tDivision: /g' echl.txt
 sed -i '/Division:/ s/$/ (sort: Div) (Playoffs: 4)/' echl.txt
 cat -n echl.txt | sort -uk2 | sort -nk1 | cut -f2- > echl2.txt
 mv echl2.txt echl.txt
-echo -e "\tKind: pro
-\tSport: hockey
-\tGender: male
-\tCountry: USA
-\tState:
-\tLevel: AA
-\tSeason: 17-18 (current: True)
-\tAuthor: Kevin Hartley
-\tNote: Automation via bash scripting and the ECHL's Leaguestat XML. Updated script as of 2018-03-15 takes into account the current home win, OT, and SO percentages for the league.
-\tLotteryNote:
+{
+echo -e "\\tKind: pro
+\\tSport: hockey
+\\tGender: male
+\\tCountry: USA
+\\tState:
+\\tLevel: AA
+\\tSeason: 17-18 (current: True)
+\\tAuthor: Kevin Hartley
+\\tNote: Automation via bash scripting and the ECHL's Leaguestat XML. Updated script as of 2018-03-15 takes into account the current home win, OT, and SO percentages for the league.
+\\tLotteryNote:
 LeagueEnd
 
 SortBegin
-\tDiv: Average Points, Points, WinsInRegulationorOvertime, GoalsDelta,
+\\tDiv: Average Points, Points, WinsInRegulationorOvertime, GoalsDelta,
 Points HeadToHeadNHL, If [(All=SameParent) Average Wins SameParent],
 GoalsFor, DrawLots
-\tConf: MoveClinchedToFront, Average Points, Points,
+\\tConf: MoveClinchedToFront, Average Points, Points,
 WinsInRegulationorOvertime, GoalsDelta, Points HeadToHeadNHL, If
 [(All=SameParent) Average Wins SameParent], GoalsFor, DrawLots
-\tLottery: MoveClinchedToFrontBySeed, Average Points, Points,
+\\tLottery: MoveClinchedToFrontBySeed, Average Points, Points,
 WinsInRegulationOrOvertime, GoalsDelta, Points HeadToHeadNHL, If
 [(All=SameParent) Average Wins SameParent], GoalsFor, DrawLots
 SortEnd
-" >> echl.txt
+"
 echo -e "RulesBegin
 	PointsForWinInRegulation:	2
 	PointsForWinInOvertime:	2
@@ -70,7 +71,7 @@ echo -e "RulesBegin
 	PercentOfGamesThatEndInTie:	0
 	PercentOfGamesThatEndInOvertimeWin:	OTPERCENT
 	PercentOfGamesThatEndInShootoutWin:	SOPERCENT
-	HomeFieldAdvantage: HMPERCENT	
+	HomeFieldAdvantage: HMPERCENT
 	WeightType:	PythagenpatIgnoreShootOutWinningGoals
 	WeightExponent:	0.458
 	WhatDoYouCallATie:	tie
@@ -84,10 +85,10 @@ echo -e "RulesBegin
 	DemotePlus:	0
 	DemotePlusPercent:	0
 RulesEnd
-" >> echl.txt
+"
 echo -e "GamesBegin
-TeamListedFirst: away" >> echl.txt
-
+TeamListedFirst: away"
+} >> echl.txt
 sed -i 's/-\\n//g' schedule.txt
 sed -i '/^ *$/d' schedule.txt #Remove empty lines
 tr -d '\n' < schedule.txt | sed 's/)/)\n/g' > games.txt
@@ -107,11 +108,11 @@ sed -i ':r;$!{N;br};s/\nscheduled_time-/ /g' schedule.txt
 sed -i '/^required_copyright.*/,+6d' schedule.txt
 seq="0 4 1 2 3"
 numlines=$(wc -l < schedule.txt)
-for ((i = 0; i <= $numlines; i += 5))
+for ((i = 0; i <= numlines; i += 5))
 do
   for j in $seq
   do
-    line=$(($j + $i))
+    line=$((j + i))
     awk -v l="$line" 'NR==l+1' schedule.txt >> test.txt
   done
 done

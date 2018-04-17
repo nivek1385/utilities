@@ -1,7 +1,7 @@
 #!/bin/bash
 #ECHL Parser for SportsClubStats
 
-cd ~/utilities/ECHLparser
+cd ~/utilities/ECHLparser || exit
 note=""
 case $1 in
 	"06-07")
@@ -72,26 +72,26 @@ sed -i 's/^division-/\t\t\tDivision: /g' echl.txt
 sed -i '/Division:/ s/$/ (sort: Div) (Playoffs: 4)/' echl.txt
 cat -n echl.txt | sort -uk2 | sort -nk1 | cut -f2- > echl2.txt
 mv echl2.txt echl.txt
-echo -e "\tKind: pro
-\tSport: hockey
-\tGender: male
-\tCountry: USA
-\tState:
-\tLevel: AA
-\tSeason: $1 (current: false)
-\tAuthor: Kevin Hartley
-\tNote:$note
-\tLotteryNote:
+echo -e "\\tKind: pro
+\\tSport: hockey
+\\tGender: male
+\\tCountry: USA
+\\tState:
+\\tLevel: AA
+\\tSeason: $1 (current: false)
+\\tAuthor: Kevin Hartley
+\\tNote:$note
+\\tLotteryNote:
 LeagueEnd
 
 SortBegin
-\tDiv: Average Points, Points, WinsInRegulationorOvertime, GoalsDelta,
+\\tDiv: Average Points, Points, WinsInRegulationorOvertime, GoalsDelta,
 Points HeadToHeadNHL, If [(All=SameParent) Average Wins SameParent],
 GoalsFor, DrawLots
-\tConf: MoveClinchedToFront, Average Points, Points,
+\\tConf: MoveClinchedToFront, Average Points, Points,
 WinsInRegulationorOvertime, GoalsDelta, Points HeadToHeadNHL, If
 [(All=SameParent) Average Wins SameParent], GoalsFor, DrawLots
-\tLottery: MoveClinchedToFrontBySeed, Average Points, Points,
+\\tLottery: MoveClinchedToFrontBySeed, Average Points, Points,
 WinsInRegulationOrOvertime, GoalsDelta, Points HeadToHeadNHL, If
 [(All=SameParent) Average Wins SameParent], GoalsFor, DrawLots
 SortEnd
@@ -116,11 +116,11 @@ sed -i ':r;$!{N;br};s/\nscheduled_time-/ /g' schedule.txt
 sed -i '/^required_copyright.*/,+6d' schedule.txt
 seq="0 4 1 2 3"
 numlines=$(wc -l < schedule.txt)
-for ((i = 0; i <= $numlines; i += 5))
+for ((i = 0; i <= numlines; i += 5))
 do
   for j in $seq
   do
-    line=$(($j + $i))
+    line=$((j + i))
     awk -v l="$line" 'NR==l+1' schedule.txt >> test.txt
   done
 done
@@ -134,11 +134,12 @@ sed -i '/(.*/ s/$/)/' schedule.txt
 sed -i ':r;$!{N;br};s/\nhome_team_code-/ /g' schedule.txt
 sed -i ':r;$!{N;br};s/\nvisiting_team_code-/ /g' schedule.txt
 numgames=$(wc -l <schedule.txt)
-numotgames=$(grep "(OT)" schedule.txt | wc -l)
-numsogames=$(grep "(SO)" schedule.txt | wc -l)
+numotgames=$(grep -c "(OT)" schedule.txt)
+numsogames=$(grep -c "(SO)" schedule.txt)
 otpercent=$(bc <<< "scale = 16; $numotgames/$numgames")
 sopercent=$(bc <<< "scale = 16; $numsogames/$numgames")
-echo -e "RulesBegin
+{
+	echo -e "RulesBegin
 	PointsForWinInRegulation:	2
 	PointsForWinInOvertime:	2
 	PointsForWinInShootout:	2
@@ -163,11 +164,12 @@ echo -e "RulesBegin
 	DemotePlus:	0
 	DemotePlusPercent:	0
 RulesEnd
-" >> echl.txt
+"
 echo -e "GamesBegin
-TeamListedFirst: away" >> echl.txt
-cat schedule.txt >> echl.txt
-echo -e "GamesEnd" >> echl.txt
+TeamListedFirst: away"
+cat schedule.txt
+echo -e "GamesEnd"
+} >> echl.txt
 sed -i 's/IDH/Steelheads/g' echl.txt
 sed -i 's/pm AKST/pm/g' echl.txt
 sed -i 's/am AKST/pm/g' echl.txt
