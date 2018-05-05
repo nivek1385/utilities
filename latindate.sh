@@ -17,11 +17,11 @@ day=$(date +%d)
 month=$(date +%b)
 year=$(date +%Y)
 
-#day=25
+#day=1
 #month="Feb"
 #year=2016
 
-one=1
+one="01"
 case $month in
     "Mar"|"May"|"Jul"|"Oct")
         ides=15
