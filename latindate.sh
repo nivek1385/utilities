@@ -13,7 +13,7 @@ toAUC() {
     echo $aucyear
 }
 
-day=$(date +%d)
+day=$(date +%d | sed 's/^0*//')
 month=$(date +%b)
 year=$(date +%Y)
 
@@ -21,7 +21,7 @@ year=$(date +%Y)
 #month="Feb"
 #year=2016
 
-one="01"
+one="1"
 case $month in
     "Mar"|"May"|"Jul"|"Oct")
         ides=15
@@ -30,6 +30,7 @@ case $month in
         ides=13
 esac
 nones=$((ides-8))
+
 if [[ $day == "$one" || $day == "$nones" || $day == "$ides" ]]; then
     case $month in
         "Jan")
