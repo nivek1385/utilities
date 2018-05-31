@@ -303,7 +303,7 @@ elif [[ $day -gt $ides ]]; then
     num=$((numdays - day + one)) #Add one for Roman-style inclusive counting
     num=$(~/utilities/num2roman.sh $num)
     num=$(echo "$num" | tr '[:upper:]' '[:lower:]')
-    if [[ $num == 2 ]]; then
+    if [[ $num == "ii" ]]; then
         latindate="Hodie est pridie Kalendas $latmon "
     else
         latindate="Hodie est ante diem $num Kalendas $latmon "
