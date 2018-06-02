@@ -244,3 +244,4 @@ pause () {
 }
 
 fortune
+~/utilities/latindate.sh
