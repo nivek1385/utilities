@@ -1,7 +1,7 @@
 # .bash_profile
 
 # User specific environment and startup programs
-PATH=${HOME}/bin:$PATH
+PATH=${HOME}/utilities:${HOME}/bin:$PATH
 
 #Exports
 export JAVA_HOME=/opt/omega/java
@@ -110,45 +110,10 @@ case $distro in
                 ;;
 esac
 
+#Displays phase of the moon and related data
 phase () {
-    # url="http://www.moongiant.com/phase/today"
-    # pattern="Illumination:"
-    # illum="$( curl -s "$url" | grep "$pattern" | tr ',' '\
-    # ' | grep "$pattern" | sed 's/[^0-9]//g')";
-    # url="http://www.moongiant.com/phase/$(date -dyesterday +%-m/%-d/%Y)";
-    # yillum="$( curl -s "$url" | grep "$pattern" | tr ',' '\
-    # ' | grep "$pattern" | sed 's/[^0-9]//g')";
-    # if [ $yillum -gt $illum ] ; then
-    #     waxing="waning";
-    # elif [ $yillum -lt $illum ] ; then
-    #     waxing="waxing";
-    # else
-    #     waxing="reading as the same illumination percentage as yesterday, so unable to determine whether it is waxing or waning,"
-    # fi
-    # if [ $illum = "" ] || [ $yillum = "" ] ; then
-    #     echo "Error retrieving moon illumination from web."
-    #     return
-    # elif [ $illum -eq 0 ] ; then
-    #     phasename="new"
-    # elif [ $illum -eq 50 ] ; then
-    #     phasename="quarter"
-    # elif [ $illum -eq 100 ] ; then
-    #     phasename="full"
-    # elif [ $illum -lt 5 ] ; then
-    #     phasename="$waxing, not quite new, and"
-    # elif [ $illum -lt 45 ] ; then
-    #     phasename="$waxing crescent"
-    # elif [ $illum -lt 55 ] ; then
-    #     phasename="$waxing, not quite quarter, and"
-    # elif [ $illum -lt 95 ] ; then
-    #     phasename="$waxing gibbous"
-    # else
-    #     phasename="$waxing and not quite full"
-    # fi
-    # echo "The moon phase is currently $phasename with $illum% illumination."
     url="https://www.timeanddate.com/moon/@z-us-20851"
     curl -s "$url" > moon.html
-
     grep "bk-focus" moon.html > moon.txt && rm moon.html
     sed -i 's/>/>\n/g' moon.txt
     sed -i 's/</\n</g' moon.txt
@@ -169,8 +134,7 @@ phase () {
     fi
     nxtriseorset=$(grep -A 6 "Next Moon$riseorset:" moon.txt | tail -n 3)
     nxtriseorset=$(echo $nxtriseorset | sed 's/<\/span>//g')
-    echo "The moon phase is currently $phase with $illum% illuminated. The next moon$riseorset is $nxtriseorset. The current direction is $dir with an altitude of $alt at a distance of $dist. The next full moon is $nxtfull; the next new moon is $nxtnew. N.B. All dates and times are for Rockville, MD." | sed 's/  / /g' | sed 's/°/ degrees/g'
-
+    echo "The moon phase is currently $phase with $illum% illuminated. The next moon$riseorset is $nxtriseorset. The current direction is $dir with an altitude of $alt at a distance of $dist. The next full moon is $nxtfull; the next new moon is $nxtnew. N.B. All dates and times are for Rockville, MD." | sed 's/  / /g' | sed 's/°/ degrees/g' | sed 's/%%/%/g'
     if [ $# -eq 0 ] ; then
         weather Moon
     elif [ $1 = "png" ] ; then

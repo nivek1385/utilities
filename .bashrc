@@ -124,4 +124,4 @@ if [ -x /usr/bin/mint-fortune ]; then
      /usr/bin/mint-fortune
 fi
 
-source .bash_profile
+source ~/.bash_profile
