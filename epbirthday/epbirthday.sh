@@ -18,17 +18,9 @@ for year in $(seq 1950 2000); do
 done
 
 cat bdays.txt | paste -d '-' - - - >> tmp.txt
-mv tmp.txt bdays.txt
-#echo "" >> bdays.txt
+iconv -f utf8 -t ascii//TRANSLIT tmp.txt -o bdays.txt
 
 awk -F '-' '{print "http://www.eliteprospects.com/player/" $1 "/" $2 "-" $3}' bdays.txt >> tmp.txt
-#exec 4<tmp.txt
-#while read -u4 line; do
-#  echo $line
-#  ./t.ny $line | tee -a urls.txt
-#  echo "$line passed to tny"
-#  sleep 30
-#done
 mv tmp.txt urls.txt
 
 awk -F '-' '{print "Happy birthday to @ECHL alum, " $2 " " $3 ". Check out his EP profile here: "}' bdays.txt >> tmp.txt
