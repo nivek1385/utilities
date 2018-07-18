@@ -2,10 +2,21 @@
 
 # User specific environment and startup programs
 PATH=${HOME}/utilities:${HOME}/bin:$PATH
+if [ -n "$PATH" ]; then
+  old_PATH=$PATH:; PATH=
+  while [ -n "$old_PATH" ]; do
+    x=${old_PATH%%:*}       # the first remaining entry
+    case $PATH: in
+      *:"$x":*) ;;         # already there
+      *) PATH=$PATH:$x;;    # not there yet
+    esac
+    old_PATH=${old_PATH#*:}
+  done
+  PATH=${PATH#:}
+  unset old_PATH x
+fi
 
 #Exports
-export JAVA_HOME=/opt/omega/java
-export PATH=${JAVA_HOME}/bin:$PATH
 export PATH
 # do not create history entries for the following commands
 export HISTIGNORE='&:[ ]*:exit:ls:bg:fg:jobs:history:clear:pwd'
