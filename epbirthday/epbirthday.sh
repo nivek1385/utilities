@@ -19,6 +19,7 @@ done
 
 cat bdays.txt | paste -d '-' - - - >> tmp.txt
 iconv -f utf8 -t ascii//TRANSLIT tmp.txt -o bdays.txt
+rm tmp.txt
 
 awk -F '-' '{print "http://www.eliteprospects.com/player/" $1 "/" $2 "-" $3}' bdays.txt >> tmp.txt
 mv tmp.txt urls.txt
