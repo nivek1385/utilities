@@ -217,6 +217,5 @@ fi
 sed -i "s/HMPERCENT/$hmpercent/g" echl.txt
 sed -i "s/OTPERCENT/$otpercent/g" echl.txt
 sed -i "s/SOPERCENT/$sopercent/g" echl.txt
-pause
 python ~/bin/send.py "import@sportsclubstats.com" "ECHL" "$(cat echl.txt)" "echl.txt"
 rm schedule.txt games.txt echl.txt team.txt teams.xml schedule.xml
