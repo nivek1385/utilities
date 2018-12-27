@@ -12,7 +12,7 @@ home="$2"
 gameid="$3"
 dt=$(date '+%Y%m%d')
 bitrate="3000"
-
+dt=20181130
 curl "https://$league.neulion.com/$league/servlets/schedule" -H 'Pragma: no-cache' -H 'Origin: null' -H 'Accept-Encoding: gzip, deflate, br' -H 'Accept-Language: en-US,en;q=0.9' -H 'User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/65.0.3325.181 Safari/537.36' -H 'Content-Type: application/x-www-form-urlencoded' -H 'Accept: */*' -H 'Cache-Control: no-cache' -H 'X-Requested-With: ShockwaveFlash/29.0.0.113' -H 'Connection: keep-alive' -H 'DNT: 1' --data 'ps=100&pn=0&isFlex=true&pm=0' --compressed -O ;
 
 sed -i 1,11d schedule
