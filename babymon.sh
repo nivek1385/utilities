@@ -3,8 +3,10 @@
 wget "http://192.168.1.246/?action=command&command=value_temperature" -O tmp.txt
 sed -i 's/value_temperature: //' tmp.txt
 tc=$(cat tmp.txt)
+echo "$tc Celsius"
 tf=$(echo "scale=2;((9/5) * $tc) + 32" | bc)
 echo "$tf"
+tf=${tf/.**/} #Truncating post-decimal point because rounding is unnecessary for these purposes.
 rm tmp.txt
 if [[ $tf -lt 60 ]]; then
   echo "LOWER THAN 60F, executing web script to raise temp..."

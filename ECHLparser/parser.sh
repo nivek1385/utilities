@@ -152,6 +152,7 @@ sed -i '/shootout/d' schedule.xml #Remove SO boolean
 sed -i '/started/d' schedule.xml #Remove started boolean lines
 sed -i '/<final>/d' schedule.xml #Remove final boolean lines
 sed -i '/city/d' schedule.xml #Remove city lines
+sed -i '/intermission/d' schedule.xml #Remove intermission lines
 sed -i 's/Final OT/Final (OT)/g' schedule.xml #Put OT in parentheses
 sed -i 's/Final SO/Final (SO)/g' schedule.xml #Put SO in parentheses
 xmlstarlet pyx schedule.xml > schedule.txt #convert xml to pyx format
@@ -218,4 +219,4 @@ sed -i "s/HMPERCENT/$hmpercent/g" echl.txt
 sed -i "s/OTPERCENT/$otpercent/g" echl.txt
 sed -i "s/SOPERCENT/$sopercent/g" echl.txt
 python ~/bin/send.py "import@sportsclubstats.com" "ECHL" "$(cat echl.txt)" "echl.txt"
-rm schedule.txt games.txt echl.txt team.txt teams.xml schedule.xml
+#rm schedule.txt games.txt echl.txt team.txt teams.xml schedule.xml
