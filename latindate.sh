@@ -1,6 +1,52 @@
 #!/bin/bash
 #Bash script to convert the current date to Latin date including AUC year.
 #Future versions to accept dates other than current date and output formats beyond AUC year.
+#Future versions also to include the following holidays:
+#   3 Jan - Cicero's birthday
+#   3-5 Jan - Compitalia
+#   9 Jan - Agonalia in honor of Janus
+#   11 and 15 JAN - Carmentalia
+#   11 Jan - Juturna festival
+#   24-26 JAN - Sementivae
+#   27 Jan - Dies natalis Castor & Pollux
+#   13-22 FEB - Parentalia
+#   15 FEB - LUPERCALIA
+#   17 FEB - Fornacalia, the baking\oven festival
+#   21 FEB - Feralia
+#   22 FEB - Caristia
+#   23 FEB - Terminalia
+#   27 FEB - Equirria
+#   14 MAR - Second Equirria\Mamuralia
+#   1  APR - Veneralia
+#   4-10 APR - Ludi Megalenses
+#   12-19 APR - Ludi Cereri\Cerialia
+#   21 APR - DIES NATALIS ROMAE
+#   9,11,13 MAY - Lemuria, festival of the dead
+#   15 May - Mercuralia
+#   7 Jun - Ludi Piscatorii
+#   7-15 Jun - Vestalia
+#   12 JUL - CIC's bday
+#   6-13 JUL - Ludi Apollinares
+#   18 JUL - dies ater (defeat of Rome by Gauls at the Battle of the Allia in 390BC)
+#   23 JUL - Neptunalia
+##
+#   2 AUG - Hannibal's defeat at the Battle of Cannae
+#   19 OCT - Scipio Africanus defeats Carthage at the Battle of Zama
+#   6 May - Crassus killed at the Battle of Carrhae
+#   10 JAN - Caesar crosses the Rubicon
+#   15 MAR - Assassination of CIC
+#   23 OCT - Brutus commits suicide 
+#   2 SEP - Battle of Actium
+#   1 AUG - Antony commits suicide
+#   30 AUG - Cleopatra commits suicide
+#   16 JAN - Octavian granted titles of Augustus and Princeps
+#   19 AUG - Death of Augustus
+#   24 JAN - Caligula assassinated
+#   18 JUL - Great Fire of Rome, Nero "fiddles"
+#   24 AUG - Vesuvius
+#   10 AUG - Hadrian named Trajan's heir
+#   4 SEP - Fall of western empire to Odoacer
+#   
 
 isLeap() {
     date -d "$1-02-29" >/dev/null 2>&1 && echo "It's a leap year" || echo "It's not a leap year"
