@@ -89,6 +89,7 @@ case $distro in
         "CentOS")
                 #Do CentOS specific items
                 alias yumu="yum update "
+
                 alias yumi="yum install "
                 ;;
         "Redhat*")
@@ -101,50 +102,6 @@ case $distro in
                 #Do non-specific items
                 ;;
 esac
-
-#Displays phase of the moon and related data
-phase () {
-    url="https://www.timeanddate.com/moon/@z-us-20851"
-    curl -s "$url" > moon.html
-    grep "bk-focus" moon.html > moon.txt && rm moon.html
-    sed -i 's/>/>\n/g' moon.txt
-    sed -i 's/</\n</g' moon.txt
-    illum=$(grep -A 1 "id=cur-moon-percent" moon.txt | tail -n 1)
-    phase=$(grep -A 7 "id=cur-moon-percent" moon.txt | tail -n 1)
-    dir=$(grep -A 8 "Moon Direction:" moon.txt | tail -n 1)
-    alt=$(grep -A 1 "id=moonalt" moon.txt | tail -n 1)
-    dist=$(grep -A 1 "id=moondist" moon.txt | tail -n 1)
-    nxtfull=$(grep -A 6 "Next Full Moon:" moon.txt | tail -n 3)
-    nxtfull=$(echo $nxtfull | sed 's/<\/span>//g')
-    nxtfull=$(echo $nxtfull | sed 's/  / /g')
-    nxtnew=$(grep -A 6 "Next New Moon:" moon.txt | tail -n 3)
-    nxtnew=$(echo $nxtnew | sed 's/<\/span>//g')
-    if [[ $(grep "Next Moonrise:" moon.txt) ]]; then
-      riseorset="rise"
-    else
-      riseorset="set"
-    fi
-    nxtriseorset=$(grep -A 6 "Next Moon$riseorset:" moon.txt | tail -n 3)
-    nxtriseorset=$(echo $nxtriseorset | sed 's/<\/span>//g')
-    echo "The moon phase is currently $phase with $illum% illuminated. The next moon$riseorset is $nxtriseorset. The current direction is $dir with an altitude of $alt at a distance of $dist. The next full moon is $nxtfull; the next new moon is $nxtnew. N.B. All dates and times are for Rockville, MD." | sed 's/  / /g' | sed 's/°/ degrees/g' | sed 's/%%/%/g'
-    if [ $# -eq 0 ] ; then
-        weather Moon
-    elif [ $1 = "png" ] ; then
-        weather Moon.png >> moon.png
-    elif [ $1 = "nowttr" ] ; then
-        echo ""
-    fi
-}
-
-#Provides weather forecast. With a ZIP code or city location, will provide weather forecast for said ZIP/city
-weather () {
-    url="wttr.in/"
-    if [ $# -eq 0 ] ; then
-        curl $url
-    else
-        curl $url${1}
-    fi
-}
 
 #Update bash dot files
 dotupdate () {
