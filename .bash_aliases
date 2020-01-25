@@ -1,6 +1,6 @@
 # .bash_aliases
 alias :q='exit'
-alias alert="notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 alias aliases='vim ~/.bash_aliases'
 alias auditoff='sudo service auditd stop'
 alias auditon='sudo service auditd start'
