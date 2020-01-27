@@ -148,4 +148,4 @@ dotupdate () {
 }
 
 fortune
-~/utilities/latindate.sh
+#~/utilities/latindate.sh
