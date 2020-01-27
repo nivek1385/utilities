@@ -1,5 +1,8 @@
 #!/bin/bash
 
+#Pull in colors.sh to define colors
+. colors.sh
+
 AbortScript() {
   Warn "ABORTING SCRIPT AT LINE NUMBER $1"
   exit 2
@@ -7,14 +10,6 @@ AbortScript() {
 
 logdtstamp() {
   date +'%Y-%m-%d %H:%M:%S'
-}
-
-Error() {
-  echo "*****ERROR: $@ *****"
-}
-
-logger() {
-  tee -a $1-$dtstamp.log
 }
 
 pause() {
@@ -28,20 +23,6 @@ rootCheck() {
 	exit 1
   fi
   return
-}
-
-Warn() {
-  echo "*****WARNING: $@ *****"
-}
-
-Debug() {
-  echo "Starting debug mode."
-  set -x
-}
-
-Undebug() {
-  set +x
-  echo "Stopped debug mode."
 }
 
 logUsage() {
@@ -62,22 +43,22 @@ notify_lvl=4
 info_lvl=5
 debug_lvl=6
 ##Colors:
-colblk='\033[0;30m' # Black - Regular
-colred='\033[0;31m' # Red
-colgrn='\033[0;32m' # Green
-colylw='\033[0;33m' # Yellow
-colblu='\033[0;34m' # Blue 
-colpur='\033[0;35m' # Purple
-colrst='\033[0m'    # Text Reset
+#colblk='\033[0;30m' # Black - Regular
+#colred='\033[0;31m' # Red
+#colgrn='\033[0;32m' # Green
+#colylw='\033[0;33m' # Yellow
+#colblu='\033[0;34m' # Blue 
+#colpur='\033[0;35m' # Purple
+#colrst='\033[0m'    # Text Reset
 ## outsilent prints output even in silent mode
 outsilent () { verb_lvl=$silent_lvl outlog "$@" ;}
 outnotify () { verb_lvl=$notify_lvl outlog "$@" ;}
 outok ()    { verb_lvl=$notify_lvl outlog "SUCCESS - $@" ;}
-outwarn ()  { verb_lvl=$warn_lvl outlog "${colylw}WARNING${colrst} - $@" ;}
-outinfo ()  { verb_lvl=$info_lvl outlog "${colblu}INFO${colrst} ---- $@" ;}
-outdebug () { verb_lvl=$debug_lvl outlog "${colgrn}DEBUG${colrst} --- $@" ;}
-outerror () { verb_lvl=$err_lvl outlog "${colred}ERROR${colrst} --- $@" ;}
-outcrit ()  { verb_lvl=$crit_lvl outlog "${colpur}FATAL${colrst} --- $@" ;}
+outwarn ()  { verb_lvl=$warn_lvl outlog "${yellow}WARNING${reset} - $@" ;}
+outinfo ()  { verb_lvl=$info_lvl outlog "${blue}INFO${reset} ---- $@" ;}
+outdebug () { verb_lvl=$debug_lvl outlog "${green}DEBUG${reset} --- $@" ;}
+outerror () { verb_lvl=$err_lvl outlog "${red}ERROR${reset} --- $@" ;}
+outcrit ()  { verb_lvl=$crit_lvl outlog "${magenta}FATAL${reset} --- $@" ;}
 outdumpvar () { for var in $@ ; do outdebug "$var=${!var}" ; done }
 outlog() {
   if [ $verbosity -ge $verb_lvl ]; then
@@ -88,19 +69,19 @@ outlog() {
 
 #Logging setup
 export LOGDIR=~/logs
-export DATE=`date +"%Y%m%d"`
-export DATETIME=`date +"%Y%m%d_%H%M%S"`
+export DATE=$(date +"%Y%m%d")
+export DATETIME=$(date +"%Y%m%d_%H%M%S")
  
-ScriptName=`basename $0`
-Job=`basename $0 .sh`"$*"
-JobClass=`basename $0 .sh`
+ScriptName=$(basename $0)
+Job=$(basename $0 .sh)i #"$*"
+JobClass=$(basename $0 .sh)
  
 startlog() {
   if [ $NO_JOB_LOGGING ] ; then
     outinfo "Not logging to a logfile because -Z option specified." #(*)
   else
     [[ -d $LOGDIR/$JobClass ]] || mkdir -p $LOGDIR/$JobClass
-    Pipe=${LOGDIR}/$JobClass/${Job}_${DATETIME}.pipe
+    Pipe=/tmp/${Job}_${DATETIME}.pipe
     mkfifo -m 700 $Pipe
     LOGFILE=${LOGDIR}/$JobClass/${Job}_${DATETIME}.log
     exec 3>&1
