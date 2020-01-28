@@ -4,6 +4,21 @@ echo "Pick a dinosaur."
 read -p "Press [Enter] when you have a dinosaur for me to guess."
 win="no"
 
+ankylosaurus() {
+  echo "                            /~~~~~~~~~~~~\_ "
+  echo "        _+=+_             _[~  /~~~~~~~~~~~~\_ "
+  echo "       {''|''}         [~~~    [~   /~~~~~~~~~\_ "
+  echo "        ''':-'~[~[~'~[~  ((++     [~  _/~~~~~~~~\_ "
+  echo "             '=_   [    ,==, ((++    [    /~~~~~~~\-~~~-. "
+  echo "                ~-_ _=+-(   )/   ((++  .~~~.[~~~~(  {@} \`. "
+  echo "                        /   }\ /     (     }     (   .   ''} "
+  echo "                       (  .+   \ /  //     )    / .,  ''''/ "
+  echo "                       \\  \     \ (   .+~~\_  /.= /''''' "
+  echo "                       <'_V_'>      \\  \    ~~~~~~\\  \ "
+  echo "                                     \\  \          \\  \ "
+  echo "                                     <'_V_'>        <'_V_'> "
+}
+
 spinosaurus() {
   echo "                        /|/|/|\\|\|                                       "
   echo "                      |  | | | | | |\                                   "
@@ -132,6 +147,9 @@ case $guess in
     ;;
   "ankylosaur")
     for guess2 in "Ankylosaurus" "Euoplocephalus" "Anodontosaurus"; do
+      if [[ $guess2 == "Ankylosaurus" ]]; then
+        ankylosaurus
+      fi
       dinoclass $guess2 "yes"
     done
     ;;
