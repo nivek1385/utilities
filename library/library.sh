@@ -42,23 +42,17 @@ warn_lvl=3
 notify_lvl=4
 info_lvl=5
 debug_lvl=6
-##Colors:
-#colblk='\033[0;30m' # Black - Regular
-#colred='\033[0;31m' # Red
-#colgrn='\033[0;32m' # Green
-#colylw='\033[0;33m' # Yellow
-#colblu='\033[0;34m' # Blue 
-#colpur='\033[0;35m' # Purple
-#colrst='\033[0m'    # Text Reset
 ## outsilent prints output even in silent mode
 outsilent () { verb_lvl=$silent_lvl outlog "$@" ;}
 outnotify () { verb_lvl=$notify_lvl outlog "$@" ;}
 outok ()    { verb_lvl=$notify_lvl outlog "SUCCESS - $@" ;}
 outwarn ()  { verb_lvl=$warn_lvl outlog "${yellow}WARNING${reset} - $@" ;}
+outwarning ()  { verb_lvl=$warn_lvl outlog "${yellow}WARNING${reset} - $@" ;}
 outinfo ()  { verb_lvl=$info_lvl outlog "${blue}INFO${reset} ---- $@" ;}
 outdebug () { verb_lvl=$debug_lvl outlog "${green}DEBUG${reset} --- $@" ;}
 outerror () { verb_lvl=$err_lvl outlog "${red}ERROR${reset} --- $@" ;}
 outcrit ()  { verb_lvl=$crit_lvl outlog "${magenta}FATAL${reset} --- $@" ;}
+outcritical ()  { verb_lvl=$crit_lvl outlog "${magenta}FATAL${reset} --- $@" ;}
 outdumpvar () { for var in $@ ; do outdebug "$var=${!var}" ; done }
 outlog() {
   if [ $verbosity -ge $verb_lvl ]; then
