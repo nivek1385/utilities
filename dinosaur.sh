@@ -146,7 +146,7 @@ case $guess in
     done
     ;;
   "ankylosaur")
-    for guess2 in "Ankylosaurus" "Euoplocephalus" "Anodontosaurus"; do
+    for guess2 in "Ankylosaurus" "Euoplocephalus" "Anodontosaurus" "Nodosaurus"; do
       if [[ $guess2 == "Ankylosaurus" ]]; then
         ankylosaurus
       fi
@@ -159,7 +159,7 @@ case $guess in
     done
     ;;
   "hadrosaur")
-    for guess2 in "Maiasaura" "Edmontosaurus" "Parasaurolophus" "Corythosaurus"; do
+    for guess2 in "Maiasaura" "Edmontosaurus" "Parasaurolophus" "Corythosaurus" "Iguanodon"; do
       if [[ $guess2 == "Parasaurolophus" ]]; then
         parasaurolophus
       fi
