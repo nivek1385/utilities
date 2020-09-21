@@ -171,5 +171,11 @@ case $guess in
       dinoclass $guess2 "yes"
     done
     ;;
+  "pterosaur")
+    for guess2 in "Pteranodon" "Hatzegopteryx" "Pterodactylus" "Quetzalcoatlus" "Pterodaustro" "Dimorphodon"; do
+      dinoclass $guess2 "yes"
+    done
+    ;;
 esac
-echo "I lose, you win."
+read -p "I give up, what is it?" dinostoadd
+echo $dinostoadd >> dinostoadd.txt
