@@ -112,7 +112,7 @@ dinoclass() {
   esac
 }
 
-for class in "raptor" "theropod" "stegosaur" "ceratopsian" "sauropod" "ankylosaur" "pachycephalosaur" "hadrosaur" "marine_reptile"; do
+for class in "raptor" "theropod" "stegosaur" "ceratopsian" "sauropod" "ankylosaur" "pachycephalosaur" "hadrosaur" "marine_reptile" "pterosaur"; do
   dinoclass $class
 done
 
