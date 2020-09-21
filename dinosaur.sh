@@ -112,7 +112,7 @@ dinoclass() {
   esac
 }
 
-for class in "raptor" "theropod" "stegosaur" "ceratopsian" "sauropod" "ankylosaur" "pachycephalosaur" "hadrosaur"; do
+for class in "raptor" "theropod" "stegosaur" "ceratopsian" "sauropod" "ankylosaur" "pachycephalosaur" "hadrosaur" "marine_reptile"; do
   dinoclass $class
 done
 
@@ -136,7 +136,7 @@ case $guess in
     done
     ;;
   "ceratopsian")
-    for guess2 in "Nedoceratops" "Triceratops" "Protoceratops" "Styracosaurus" "Kosmoceratops"; do
+    for guess2 in "Nedoceratops" "Triceratops" "Protoceratops" "Styracosaurus" "Kosmoceratops" "Torosaurus"; do
       dinoclass $guess2 "yes"
     done
     ;;
@@ -163,6 +163,11 @@ case $guess in
       if [[ $guess2 == "Parasaurolophus" ]]; then
         parasaurolophus
       fi
+      dinoclass $guess2 "yes"
+    done
+    ;;
+  "marine_reptile")
+    for guess2 in "Mosasaurus" "Cretoxyrhina" "Megalodon" "" "Plesiosaurus" "Ichtyosaurus" "Nothosaurus" "Kronosaurus" "Archelon"; do
       dinoclass $guess2 "yes"
     done
     ;;
