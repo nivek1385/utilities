@@ -2,7 +2,6 @@
 
 echo "Pick a dinosaur."
 read -p "Press [Enter] when you have a dinosaur for me to guess."
-win="no"
 
 ankylosaurus() {
   echo "                            /~~~~~~~~~~~~\_ "
@@ -123,7 +122,7 @@ case $guess in
     done
     ;;
   "theropod")
-    for guess2 in "T-Rex" "Allosaurus" "Gorgosaurus" "Indominus_Rex" "Yangchuanosaurus" "Spinosaurus" "Giganotosaurus" "Carcharodontoisaurus" "Acrocanthosaurus" "Mapusaurus"; do
+    for guess2 in "T-Rex" "Allosaurus" "Gorgosaurus" "Indominus_Rex" "Yangchuanosaurus" "Spinosaurus" "Giganotosaurus" "Carcharodontoisaurus" "Acrocanthosaurus" "Mapusaurus" "Troodon"; do
       if [[ $guess2 == "Spinosaurus" ]]; then
         spinosaurus
       fi
