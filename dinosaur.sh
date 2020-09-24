@@ -8,20 +8,21 @@ main() {
   echo $dinostoadd >> dinostoadd.txt
 }
 
-triassicdinos="$(shuf -e \"eoraptor herrerasaurus marasuchus\")"
-jurassicdinos="$(shuf -e \"Stegosaurus Allosaurus brachiosaurus kentrosaurus Yangchuanosaurus Huayangosaurus Gigantspinosaurus Kentrosaurus Brachiosaurus Supersaurus Xinjiangtitan\")"
-cretaceousdinos="$(shuf -e \"Velociraptor Oviraptor Utahraptor Dakotaraptor Dromaeosaurus Deinonychus Giganotasaurus troodon T-Rex kosmoceratops Gorgosaurus Spinosaurus Carcharodontosaurus Acrocanthosaurus Mapusaurus Troodon Nedoceratops Triceratops Protoceratops Styracosaurus Kosmoceratops Torosaurus Argentinosaurus Sauroposeidon\")"
-dinofamilies="$(shuf -e \"raptor theropod stegosaur ceratopsian sauropod ankylosaur pachycephalosaur hadrosaur marine_reptile pterosaur\")"
-raptors="$(shuf -e \"Velociraptor Oviraptor Utahraptor Dakotaraptor Dromaeosaurus Deinonychyus\")"
-theropods="$(shuf -e \"T-Rex Allosaurus Gorgosaurus Indominus_Rex Yangchuanosaurus Spinosaurus Giganotosaurus Carcharodontosaurus Acrocanthosaurus Mapusaurus Troodon\")"
-stegosaurs="$(shuf -e \"Huayangosaurus Gigantspinosaurus Stegosaurus Kentrosaurus\")"
-ceratopsians="$(shuf -e \"Nedoceratops Triceratops Protoceratops Styracosaurus Kosmoceratops Torosaurus\")"
-sauropods="$(shuf -e \"Brachiosaurus Supersaurus Argentinosaurus Sauroposeidon Xinjiangtitan Astrodon_Johnstoni Diplodocus Apatosaurus Alamosaurus\")"
-ankylosaurs="$(shuf -e \"Ankylosaurus Euoplocephalus Anodontosaurus Nodosaurus Aletopelta\")"
-pachycephalosaurs="$(shuf -e \"Pachycephalosaurus Stygimoloch Dracorex Stegoceras\")"
-hadrosaurs="$(shuf -e \"Maiasaura Edmontosaurus Parasaurolophus Corythosaurus Iguanodon Gryposaurus\")"
-marine_reptiles="$(shuf -e \"Mosasaurus Cretoxyrhina Megalodon Plesiosaurus Ichthyosaurus Nothosaurus Kronosaurus Archelon\")"
-pterosaurs="$(shuf -e \"Pteranodon Hatzegopteryx Pterodactylus Quetzalcoatlus Pterodaustro Dimorphodon\")"
+triassicdinos="$(shuf -e Eoraptor Herrerasaurus Marasuchus Ichthyosaurus Nothosaurus Camposaurus Caseosaurus Chindesaurus Coelophysis Daemonosaurus Gojirasaurus Lepidus_praecisio Tawa_hallae)"
+jurassicdinos="$(shuf -e Stegosaurus Allosaurus Brachiosaurus Kentrosaurus Yangchuanosaurus Huayangosaurus Gigantspinosaurus Kentrosaurus Brachiosaurus Supersaurus Xinjiangtitan Diplodocus Apatosaurus Plesiosaurus Ichthyosaurus Pterodactylus Dimorphodon Dilophosaurus Sarahsaurus)"
+cretaceousdinos="$(shuf -e Velociraptor Oviraptor Utahraptor Dakotaraptor Dromaeosaurus Deinonychus Giganotasaurus T-Rex Gorgosaurus Spinosaurus Carcharodontosaurus Acrocanthosaurus Mapusaurus Troodon Nedoceratops Triceratops Protoceratops Styracosaurus Kosmoceratops Torosaurus Argentinosaurus Sauroposeidon Astrodon_Johnstoni Alamosaurus Ankylosaurus Euoplocephalus Anodontosaurus Nodosaurus Aletopelta Pachycephalosaurus Stygimoloch Dracorex Stegoceras Maiasaura Edmontosaurus Parasaurolophus Corythosaurus Iguanodon Gryposaurus Mosasaurus Cretoxyrhina Megalodon Kronosaurus Archelon Pteranodon Hatzegopteryx Quetzalcoatlus Pterodaustro)"
+fictionaldinos="$(shuf -e Indominus_Rex)"
+dinofamilies="$(shuf -e raptor theropod stegosaur ceratopsian sauropod ankylosaur pachycephalosaur hadrosaur marine_reptile pterosaur)"
+raptors="$(shuf -e Velociraptor Oviraptor Utahraptor Dakotaraptor Dromaeosaurus Deinonychyus)"
+theropods="$(shuf -e T-Rex Allosaurus Gorgosaurus Indominus_Rex Yangchuanosaurus Spinosaurus Giganotosaurus Carcharodontosaurus Acrocanthosaurus Mapusaurus Troodon Camposaurus Caseosaurus Chindesaurus Coelophysis Daemonosaurus Gojirasaurus Lepidus_praecisio Tawa_hallae Dilophosaurus)"
+stegosaurs="$(shuf -e Huayangosaurus Gigantspinosaurus Stegosaurus Kentrosaurus)"
+ceratopsians="$(shuf -e Nedoceratops Triceratops Protoceratops Styracosaurus Kosmoceratops Torosaurus)"
+sauropods="$(shuf -e Brachiosaurus Supersaurus Argentinosaurus Sauroposeidon Xinjiangtitan Astrodon_Johnstoni Diplodocus Apatosaurus Alamosaurus Plateosaurus Sarahsaurus)"
+ankylosaurs="$(shuf -e Ankylosaurus Euoplocephalus Anodontosaurus Nodosaurus Aletopelta)"
+pachycephalosaurs="$(shuf -e Pachycephalosaurus Stygimoloch Dracorex Stegoceras)"
+hadrosaurs="$(shuf -e Maiasaura Edmontosaurus Parasaurolophus Corythosaurus Iguanodon Gryposaurus)"
+marine_reptiles="$(shuf -e Mosasaurus Cretoxyrhina Megalodon Plesiosaurus Ichthyosaurus Nothosaurus Kronosaurus Archelon)"
+pterosaurs="$(shuf -e Pteranodon Hatzegopteryx Pterodactylus Quetzalcoatlus Pterodaustro Dimorphodon)"
 
 guessmethod() {
   echo "How would you like to play?"
@@ -52,6 +53,7 @@ period() {
   echo "1. Triassic"
   echo "2. Jurassic"
   echo "3. Cretaceous"
+  echo "4. Fictional"
   echo ""
   read choice
   while true; do
@@ -66,6 +68,10 @@ period() {
       ;;
       "3")
         cretaceous
+        break
+      ;;
+      "4")
+        fictional
         break
       ;;
       *)
@@ -95,6 +101,19 @@ cretaceous() {
   done
 }
 
+fictional() {
+  for dino in $fictionaldinos; do
+    dinoclass $dino "yes"
+  done
+}
+
+random() {
+  dinos=$(shuf -e $triassicdinos $jurassicdinos $cretaceousdinos $fictionaldinos)
+  for dino in $dinos; do
+    dinoclass $dino "yes"
+  done 
+}
+
 family() {
 for class in $dinofamilies; do
   dinoclass $class
@@ -108,9 +127,9 @@ case $guess in
     ;;
   "theropod")
     for guess2 in $theropods; do
-      if [[ $guess2 == "Spinosaurus" ]]; then
-        spinosaurus
-      fi
+#      if [[ $guess2 == "Spinosaurus" ]]; then
+#        spinosaurus
+#      fi
       dinoclass $guess2 "yes"
     done
     ;;
@@ -131,9 +150,9 @@ case $guess in
     ;;
   "ankylosaur")
     for guess2 in $ankylosaurs; do
-      if [[ $guess2 == "Ankylosaurus" ]]; then
-        ankylosaurus
-      fi
+#      if [[ $guess2 == "Ankylosaurus" ]]; then
+#        ankylosaurus
+#      fi
       dinoclass $guess2 "yes"
     done
     ;;
@@ -144,9 +163,9 @@ case $guess in
     ;;
   "hadrosaur")
     for guess2 in $hadrosaurs; do
-      if [[ $guess2 == "Parasaurolophus" ]]; then
-        parasaurolophus
-      fi
+#      if [[ $guess2 == "Parasaurolophus" ]]; then
+#        parasaurolophus
+#      fi
       dinoclass $guess2 "yes"
     done
     ;;
@@ -253,6 +272,17 @@ dinoclass() {
   #species = $2
   class=$1
   species=$2
+  case $1 in
+    "Parasaurolophus")
+      parasaurolophus
+    ;;
+    "Spinosaurus")
+      spinosaurus
+    ;;
+    "Ankylosaurus")
+      ankylosaurus
+    ;;
+  esac
   echo "Is your dinosaur a/an $class?"
   read answer
   case $answer in
